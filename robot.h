@@ -16,6 +16,11 @@ Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
 #define in2 11
 #define in3 12
 #define in4 13
+//*****************VARIABLE****************
+unsigned long impulsion_echo_droite,impulsion_echo_gauche;
+unsigned int distance_droite,distance_gauche;
+char data_bt;
+//****************FONCTION*****************
 void bluetooth(void)
 {
 
@@ -23,34 +28,34 @@ void bluetooth(void)
 
 void avancer_droite(void)
 {
-  digital.Write(in1,1);
-  digital.Write(in2,0);
+  digitalWrite(in1,1);
+  digitalWrite(in2,0);
 }
 
 void avancer_gauche(void)
 {
-  digital.Write(in3,1);
-  digital.Write(in4,0);
+  digitalWrite(in3,1);
+  digitalWrite(in4,0);
 }
 
 void reculer_droite(void)
 {
-  digital.Write(in1,0);
-  digital.Write(in2,1);
+  digitalWrite(in1,0);
+  digitalWrite(in2,1);
 }
 
 void reculer_gauche(void)
 {
-  digital.Write(in1,0);
-  digital.Write(in2,1);
+  digitalWrite(in1,0);
+  digitalWrite(in2,1);
 }
 
 void freinage(void)
 {
-  digital.Write(in3,1);
-  digital.Write(in4,1);
-  digital.Write(in3,1);
-  digital.Write(in4,1); 
+  digitalWrite(in3,1);
+  digitalWrite(in4,1);
+  digitalWrite(in3,1);
+  digitalWrite(in4,1); 
 }
 void tourner_gauche(void)
 {
