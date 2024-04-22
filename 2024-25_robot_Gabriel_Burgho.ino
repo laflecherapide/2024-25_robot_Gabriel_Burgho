@@ -47,7 +47,7 @@ void loop()
   switch(choix_user){
     case 0:
     display.print("bluetooth");
-    /*if(Serial1.available)
+    if(Serial1.available)
     {
       data_rx = Serial1.read();
       switch (data_rx)
@@ -55,7 +55,7 @@ void loop()
         case :
         break;
       }
-    }*/
+    }
     break;
     case 1:
     display.print("automatique");
