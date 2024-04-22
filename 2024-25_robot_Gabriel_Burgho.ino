@@ -1,8 +1,11 @@
+//************LIBRAIRIE*************
 #include "robot.h"
-
-extern unsigned long impulsion_echo_droite,impulsion_echo_gauche;
-extern unsigned int distance_droite,distance_gauche;
+//************VARIABLE************
+extern unsigned long impulsion_echo_droite, impulsion_echo_gauche;
+extern unsigned int distance_droite, distance_gauche;
 extern char data_bt;
+extern byte vitesse;
+int mode_de_fonctionnement;
 
 void setup() 
 {
@@ -18,63 +21,101 @@ void setup()
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SH110X_WHITE);
-  display.setRotation(2);
+  display.setRotation(1);
   display.setCursor(0, 0);
-  display.print("choix d'utilisateur");
-  display.print("appuez sur B pour confirmer");
-  display.display();
-  display.clearDisplay();
 }
 
-
-bool choix_user(int choix)
+//**********FONCTION************
+int choix_user(void) 
 {
-  if(!digitalRead(BP_C))
+  if (!digitalRead(BP_C)) 
   {
     display.println("mode bluetooth");
     display.print("appuez sur B pour confirmer");
-    display.display();
-    if(!digitalRead(BP_B)) return mode_bluetooth;
+    refresh();
+    while (1) 
+    {
+      display.setCursor(0, 0);
+      if (!digitalRead(BP_B)) 
+      {
+        display.print("bluetooth");
+        refresh();
+        return mode_bluetooth;
+      } else mode_de_fonctionnement = choix_user();
+    }
   }
-  if (!digitalRead(BP_A))
+  if (!digitalRead(BP_A)) 
   {
     display.println("mode automatique");
     display.print("appuez sur B pour confirmer");
-    if(!digitalRead(BP_B)) return mode_auto;
+    refresh();
+    while (1) 
+    {
+      display.setCursor(0, 0);
+      if (!digitalRead(BP_B)) 
+      {
+        display.print("automatique");
+        refresh();
+        return mode_auto;
+      } else mode_de_fonctionnement = choix_user();
+    }
   }
-  return 3;
+  return pas_de_choix;
 }
 
-void loop() 
-{
-  switch(choix_user){
-    case 0:
-    display.print("bluetooth");
-    if(Serial1.available())
-    {
-      data_bt = Serial1.read();
-      switch (data_bt)
+void loop() {
+  display.setCursor(0, 0);
+  switch (mode_de_fonctionnement) 
+  {
+    case pas_de_choix:
+      refresh();
+      avant_choix();
+      mode_de_fonctionnement = choix_user();
+      break;
+    case mode_bluetooth:
+      display.println("bluetooth");
+      affichage_vitesse();
+      refresh();
+      if (Serial1.available()) 
       {
-        case 'A':
-        avancer_droite();
-        avancer_gauche();
-        break;
+        data_bt = Serial1.read();
+        switch (data_bt) 
+        {
+          case 'A':
+            avancer_droite();
+            avancer_gauche();
+            break;
+          case 'R':
+            reculer_droite();
+            reculer_gauche();
+            break;
+          case 'B':
+            freinage();
+            break;
+          case 'D':
+            avancer_gauche();
+            reculer_droite();
+            break;
+          case 'G':
+            avancer_droite();
+            reculer_gauche();
+            break;
+        }
       }
-    }
-    break;
-    case 1:
-    display.print("automatique");
-    automatic();
-    if (distance_droite)
-    {
-
-    }
-    if (distance_gauche)
-    {
-
-    }
-    break;
+      break;
+    case mode_auto:
+      display.println("automatique");
+      affichage_vitesse();
+      refresh();      
+      automatic();
+      avancer_droite();
+      avancer_gauche();
+      if (distance_droite <= 7) 
+      {
+      }
+      if (distance_gauche <= 7) 
+      {
+      }
+      break;
   }
-  display.display();
-  display.clearDisplay();
 }
