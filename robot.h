@@ -21,7 +21,7 @@ Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
 unsigned long impulsion_echo_droite,impulsion_echo_gauche;
 unsigned int distance_droite,distance_gauche;
 char data_bt;
-byte vitesse = 0;
+int vitesse = 0;
 //****************FONCTION*****************
 
 void avant_choix(void)
@@ -100,4 +100,22 @@ void refresh(void)
 void affichage_vitesse(void)
 {
   Serial.printf("vitesse = %d %", vitesse);
+}
+void choix_vitesse(void)
+{
+  //display.println("choix de la vitesse:");
+  display.printf("vitesse = %d %");
+  if (!digitalRead(BP_C)) 
+  {
+    vitesse += 10;
+    refresh();
+    while(1);
+  } 
+  if (!digitalRead(BP_A))
+  {
+     vitesse -= 10;
+     refresh();
+     while(1);
+  }
+  refresh();
 }

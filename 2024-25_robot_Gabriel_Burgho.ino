@@ -4,27 +4,8 @@
 extern unsigned long impulsion_echo_droite, impulsion_echo_gauche;
 extern unsigned int distance_droite, distance_gauche;
 extern char data_bt;
-extern byte vitesse;
+extern int vitesse;
 int mode_de_fonctionnement;
-
-void setup() 
-{
-  Serial1.begin(9600);
-  pinMode(BP_A, INPUT_PULLUP);
-  pinMode(BP_B, INPUT_PULLUP);
-  pinMode(BP_C, INPUT_PULLUP);
-  pinMode(pin_echo_droite, INPUT);
-  pinMode(pin_trig_droite, OUTPUT);
-  pinMode(pin_echo_gauche, INPUT);
-  pinMode(pin_trig_gauche, OUTPUT);
-  display.begin(0x3C, true);
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(SH110X_WHITE);
-  display.setRotation(1);
-  display.setCursor(0, 0);
-}
-
 //**********FONCTION************
 int choix_user(void) 
 {
@@ -61,6 +42,31 @@ int choix_user(void)
     }
   }
   return pas_de_choix;
+}
+
+void setup() 
+{
+  Serial1.begin(9600);
+  pinMode(BP_A, INPUT_PULLUP);
+  pinMode(BP_B, INPUT_PULLUP);
+  pinMode(BP_C, INPUT_PULLUP);
+  pinMode(pin_echo_droite, INPUT);
+  pinMode(pin_trig_droite, OUTPUT);
+  pinMode(pin_echo_gauche, INPUT);
+  pinMode(pin_trig_gauche, OUTPUT);
+  display.begin(0x3C, true);
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SH110X_WHITE);
+  display.setRotation(1);
+  delay(1000);
+  display.setCursor(0, 0);
+  while(true)
+  {
+    display.setCursor(0, 0);
+    choix_vitesse();
+    if (!digitalRead(BP_B)) continue;
+  }
 }
 
 void loop() {
