@@ -39,7 +39,7 @@ void loop() {
       break;
     case mode_bluetooth:
       display.println("bluetooth");
-      affichage_vitesse();
+      //affichage_vitesse();
       refresh();
       if (Serial1.available()) 
       {
@@ -70,7 +70,7 @@ void loop() {
       break;
     case mode_auto:
       display.println("automatique");
-      affichage_vitesse();
+      //affichage_vitesse();
       refresh();      
       automatic();
       avancer_droite();

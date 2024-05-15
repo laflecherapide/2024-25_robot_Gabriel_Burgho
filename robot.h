@@ -1,7 +1,7 @@
 //****************LIBRAIRIE*****************
 #include <Adafruit_SH110X.h>
 //******************OBJET*******************
-Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
+extern Adafruit_SH1107 display;
 //****************CONSTANTE****************
 #define BP_A 9
 #define BP_B 6
@@ -18,11 +18,11 @@ Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
 #define in3 12
 #define in4 13
 //*****************VARIABLE****************
-unsigned long impulsion_echo_droite,impulsion_echo_gauche;
-unsigned int distance_droite,distance_gauche;
-char data_bt;
-int vitesse = 0;
-int mode_de_fonctionnement;
+extern unsigned long impulsion_echo_droite,impulsion_echo_gauche;
+extern unsigned int distance_droite,distance_gauche;
+extern char data_bt;
+extern unsigned int vitesse;
+extern int mode_de_fonctionnement;
 //****************FONCTION*****************
 void choix_vitesse(void);
 void refresh(void);
