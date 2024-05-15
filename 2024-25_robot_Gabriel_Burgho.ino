@@ -30,6 +30,14 @@ void setup()
 //**************LOOP*****************
 void loop() {
   display.setCursor(0, 0);
+  while(1)
+  {
+    if (Serial1.available())
+    {
+      char bt = Serial1.read();
+      Serial.println(bt);
+    }
+  }
   switch (mode_de_fonctionnement) 
   {
     case pas_de_choix:
