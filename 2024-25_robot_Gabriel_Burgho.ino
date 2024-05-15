@@ -38,8 +38,11 @@ void loop() {
       mode_de_fonctionnement = choix_user();
       break;
     case mode_bluetooth:
+    while(1)
+    {
+      display.setCursor(0, 0);
       display.println("bluetooth");
-      //affichage_vitesse();
+      affichage_vitesse();
       refresh();
       if (Serial1.available()) 
       {
@@ -67,10 +70,14 @@ void loop() {
             break;
         }
       }
+    }
       break;
     case mode_auto:
+    while(1)
+    {
+      display.setCursor(0, 0);
       display.println("automatique");
-      //affichage_vitesse();
+      affichage_vitesse();
       refresh();      
       automatic();
       avancer_droite();
@@ -81,6 +88,7 @@ void loop() {
       if (distance_gauche <= 7) 
       {
       }
+    }
       break;
   }
 }
