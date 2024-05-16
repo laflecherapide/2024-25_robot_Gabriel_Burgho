@@ -111,12 +111,12 @@ void freinage(void)
   digitalWrite(in4,1); 
 }
 
-/*void tourner_gauche(void)
+void tourner_gauche(int time_1, int time_2)
 {
   freinage();
-  avancer_droite();
-  reculer_gauche();
-}*/
+  avancer_droite(time_1);
+  reculer_gauche(time_2);
+}
 
 void automatic(void)
 {
@@ -132,12 +132,12 @@ void automatic(void)
   distance_droite = impulsion_echo_droite * 0.034/2;
 }
 
-/*void tourner_droite(void)
+void tourner_droite(int time_1, int time_2)
 {
   freinage();
-  avancer_gauche();
-  reculer_droite();
-}*/
+  avancer_gauche(time_1);
+  reculer_droite(time_2);
+}
 
 void affichage_vitesse(void)
 {
