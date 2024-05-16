@@ -58,23 +58,23 @@ void loop() {
         switch (data_bt) 
         {
           case 'A':
-            avancer_droite();
-            avancer_gauche();
+            avancer_droite(100);
+            avancer_gauche(100);
             break;
           case 'R':
-            reculer_droite();
-            reculer_gauche();
+            reculer_droite(100);
+            reculer_gauche(100);
             break;
           case 'B':
             freinage();
             break;
           case 'D':
-            avancer_gauche();
-            reculer_droite();
+            avancer_gauche(100);
+            reculer_droite(100);
             break;
           case 'G':
-            avancer_droite();
-            reculer_gauche();
+            avancer_droite(100);
+            reculer_gauche(100);
             break;
         }
       }
@@ -88,8 +88,8 @@ void loop() {
       affichage_vitesse();
       refresh();      
       automatic();
-      avancer_droite();
-      avancer_gauche();
+      avancer_droite(100);
+      avancer_gauche(100);
       if (distance_droite <= 7) 
       {
       }

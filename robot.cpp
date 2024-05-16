@@ -75,32 +75,32 @@ void avant_choix(void)
   display.print("appuez sur B pour confirmer");
 }
 
-void avancer_droite(void)
+void avancer_droite(int time)
 {
-  delay(100);
   digitalWrite(in1,1);
   digitalWrite(in2,0);
+  delay(time);
 }
 
-void avancer_gauche(void)
+void avancer_gauche(int time)
 {
   digitalWrite(in3,1);
   digitalWrite(in4,0);
-  delay(100);
+  delay(time);
 }
 
-void reculer_droite(void)
+void reculer_droite(int time)
 {
   digitalWrite(in1,0);
   digitalWrite(in2,1);
-  delay(100);
+  delay(time);
 }
 
-void reculer_gauche(void)
+void reculer_gauche(int time)
 {
   digitalWrite(in1,0);
   digitalWrite(in2,1);
-  delay(100);
+  delay(time);
 }
 
 void freinage(void)
@@ -111,12 +111,12 @@ void freinage(void)
   digitalWrite(in4,1); 
 }
 
-void tourner_gauche(void)
+/*void tourner_gauche(void)
 {
   freinage();
   avancer_droite();
   reculer_gauche();
-}
+}*/
 
 void automatic(void)
 {
@@ -132,12 +132,12 @@ void automatic(void)
   distance_droite = impulsion_echo_droite * 0.034/2;
 }
 
-void tourner_droite(void)
+/*void tourner_droite(void)
 {
   freinage();
   avancer_gauche();
   reculer_droite();
-}
+}*/
 
 void affichage_vitesse(void)
 {
