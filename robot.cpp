@@ -141,5 +141,5 @@ void tourner_droite(int time_1, int time_2)
 
 void affichage_vitesse(void)
 {
-  display.printf("vitesse = %d %", vitesse);
+  display.printf("vitesse = %d", vitesse);
 }

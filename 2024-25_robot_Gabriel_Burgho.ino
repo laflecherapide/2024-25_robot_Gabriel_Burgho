@@ -1,5 +1,6 @@
 //************LIBRAIRIE*************
 #include "robot.h"
+//#define bt_debug
 //**************SETUP*****************
 void setup() 
 {
@@ -29,7 +30,9 @@ void setup()
 }
 //**************LOOP*****************
 void loop() {
+  mode_de_fonctionnement = mode_bluetooth;
   display.setCursor(0, 0);
+  #ifdef bt_debug
   while(1)
   {
     if (Serial1.available())
@@ -38,6 +41,7 @@ void loop() {
       Serial.println(bt);
     }
   }
+  #endif
   switch (mode_de_fonctionnement) 
   {
     case pas_de_choix:
@@ -46,8 +50,6 @@ void loop() {
       mode_de_fonctionnement = choix_user();
       break;
     case mode_bluetooth:
-    while(1)
-    {
       display.setCursor(0, 0);
       display.println("bluetooth");
       affichage_vitesse();
@@ -78,11 +80,8 @@ void loop() {
             break;
         }
       }
-    }
       break;
     case mode_auto:
-    while(1)
-    {
       display.setCursor(0, 0);
       display.println("automatique");
       affichage_vitesse();
@@ -92,11 +91,12 @@ void loop() {
       avancer_gauche(100);
       if (distance_droite <= 7) 
       {
+        tourner_gauche(200, 200);
       }
       if (distance_gauche <= 7) 
       {
+        tourner_droite(200, 200);
       }
-    }
       break;
   }
 }
