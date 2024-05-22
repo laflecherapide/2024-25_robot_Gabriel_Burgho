@@ -22,6 +22,13 @@ void setup()
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
   init_interrupt(10);
+  /*
+  while(!digitalRead(BP_B))
+  {
+    display.setCursor(0, 0);
+    choix_vitesse();
+  }
+  */
   while(true)
   {
     display.setCursor(0, 0);
@@ -46,26 +53,26 @@ void loop() {
   switch (mode_de_fonctionnement) 
   {
     case pas_de_choix:
-      refresh();
-      avant_choix();
-      mode_de_fonctionnement = choix_user();
+      refresh_display();
+      avant_choix();//todo
+      mode_de_fonctionnement = choix_user();//todo
       break;
     case mode_bluetooth:
       display.setCursor(0, 0);
       display.println("bluetooth");
       affichage_vitesse();
-      refresh();
-      bluetooth();
+      refresh_display();
+      bluetooth(); //todo
       break;
     case mode_auto:
       display.setCursor(0, 0);
       display.println("automatique");
       affichage_vitesse();
-      refresh();
+      refresh_display();
       get_distance();
       avancer_droite(100);
       avancer_gauche(100);
-      TimerCallback0();      
+      TimerCallback0();  //todo    
       break;
   }
 }

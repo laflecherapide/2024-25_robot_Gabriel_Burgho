@@ -16,14 +16,14 @@ int choix_user(void)
   {
     display.println("mode bluetooth");
     display.print("appuez sur B pour confirmer");
-    refresh();
+    refresh_display();
     while (1) 
     {
       display.setCursor(0, 0);
       if (!digitalRead(BP_B)) 
       {
         display.print("bluetooth");
-        refresh();
+        refresh_display();
         return mode_bluetooth;
       } else mode_de_fonctionnement = choix_user();
     }
@@ -32,14 +32,14 @@ int choix_user(void)
   {
     display.println("mode automatique");
     display.print("appuez sur B pour confirmer");
-    refresh();
+    refresh_display();
     while (1) 
     {
       display.setCursor(0, 0);
       if (!digitalRead(BP_B)) 
       {
         display.print("automatique");
-        refresh();
+        refresh_display();
         return mode_auto;
       } else mode_de_fonctionnement = choix_user();
     }
@@ -51,7 +51,7 @@ void choix_vitesse(void)
 {
   display.println("choix de la vitesse:");
   display.printf("vitesse = %d", vitesse);
-  refresh();
+  refresh_display();
   if (!digitalRead(BP_A) && vitesse < 200) 
   {
     vitesse += 10;
@@ -64,7 +64,7 @@ void choix_vitesse(void)
   }
 }
 
-void refresh(void)
+void refresh_display(void)
 {
   display.display();
   display.clearDisplay();
