@@ -31,7 +31,7 @@ void setup()
 }
 //**************LOOP*****************
 void loop() {
-  mode_de_fonctionnement = mode_bluetooth;
+  //mode_de_fonctionnement = mode_bluetooth;
   display.setCursor(0, 0);
   #ifdef bt_debug
   while(1)

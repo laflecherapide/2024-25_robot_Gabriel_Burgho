@@ -1,24 +1,16 @@
+//****************LIBRAIRIE*****************
 #include "interrupt.h"
 #include "robot.h"
-// This example can have just about any frequency for the callback
-// automatically calculated!
-//float freq = 1000.0; // 1 KHz -> 1ms
-int cpt = 0;
-
-
-// timer tester
+//******************OBJET*******************
 Adafruit_ZeroTimer zerotimer = Adafruit_ZeroTimer(5);
-
-
+//*****************VARIABLE****************
+int cpt = 0;
+volatile bool togglepin = false;
+//*****************FONCTION*****************
 void TC5_Handler() 
 {
   Adafruit_ZeroTimer::timerHandler(5);
 }
-
-// Fonction pour appliquer le filtre exponentiel
-
-// the timer callback
-volatile bool togglepin = false;
 void TimerCallback0(void)
 {
   automatic(7);
