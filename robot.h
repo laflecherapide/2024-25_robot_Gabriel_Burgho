@@ -24,7 +24,7 @@ extern char data_bt;
 extern unsigned int vitesse;
 extern int mode_de_fonctionnement;
 //****************FONCTION*****************
-void choix_vitesse(void);
+int choix_vitesse(void);
 void refresh_display(void);
 void avant_choix(void);
 void avancer_droite(int);

@@ -22,19 +22,7 @@ void setup()
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
   init_interrupt(10);
-  /*
-  while(!digitalRead(BP_B))
-  {
-    display.setCursor(0, 0);
-    choix_vitesse();
-  }
-  */
-  while(true)
-  {
-    display.setCursor(0, 0);
-    choix_vitesse();
-    if (!digitalRead(BP_B)) break;
-  }
+  choix_vitesse();
 }
 //**************LOOP*****************
 void loop() {

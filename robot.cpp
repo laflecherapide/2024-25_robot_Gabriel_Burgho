@@ -47,21 +47,26 @@ int choix_user(void)
   return pas_de_choix;
 }
 
-void choix_vitesse(void)
+int choix_vitesse(void)
 {
-  display.println("choix de la vitesse:");
-  display.printf("vitesse = %d", vitesse);
-  refresh_display();
-  if (!digitalRead(BP_A) && vitesse < 200) 
+  while(true)
   {
-    vitesse += 10;
-    //while(1);
-  } 
-  if (!digitalRead(BP_C) && vitesse > 0)
-  {
-    vitesse -= 10;
-     //while(1);
-  }
+    display.setCursor(0, 0);
+    display.println("choix de la vitesse:");
+    display.printf("vitesse = %d", vitesse);
+    refresh_display();
+    if (!digitalRead(BP_A) && vitesse < 200) 
+    {
+      vitesse += 10;
+      //while(1);
+      } 
+      if (!digitalRead(BP_C) && vitesse > 0)
+      {
+        vitesse -= 10;
+        //while(1);
+        }
+        if (!digitalRead(BP_B)) return vitesse;
+        }
 }
 
 void refresh_display(void)
