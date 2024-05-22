@@ -21,6 +21,7 @@ void setup()
   display.setTextSize(1);
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
+  init_interrupt(10);
   while(true)
   {
     display.setCursor(0, 0);
@@ -54,49 +55,17 @@ void loop() {
       display.println("bluetooth");
       affichage_vitesse();
       refresh();
-      if (Serial1.available()) 
-      {
-        data_bt = Serial1.read();
-        switch (data_bt) 
-        {
-          case 'A':
-            avancer_droite(100);
-            avancer_gauche(100);
-            break;
-          case 'R':
-            reculer_droite(100);
-            reculer_gauche(100);
-            break;
-          case 'B':
-            freinage();
-            break;
-          case 'D':
-            avancer_gauche(100);
-            reculer_droite(100);
-            break;
-          case 'G':
-            avancer_droite(100);
-            reculer_gauche(100);
-            break;
-        }
-      }
+      bluetooth();
       break;
     case mode_auto:
       display.setCursor(0, 0);
       display.println("automatique");
       affichage_vitesse();
-      refresh();      
-      automatic();
+      refresh();
+      get_distance();
       avancer_droite(100);
       avancer_gauche(100);
-      if (distance_droite <= 7) 
-      {
-        tourner_gauche(200, 200);
-      }
-      if (distance_gauche <= 7) 
-      {
-        tourner_droite(200, 200);
-      }
+      TimerCallback0();      
       break;
   }
 }

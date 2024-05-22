@@ -1,5 +1,6 @@
 //****************LIBRAIRIE*****************
 #include "robot.h"
+#include "interrupt.h"
 //******************OBJET*******************
 Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
 //*****************VARIABLE****************
@@ -118,7 +119,7 @@ void tourner_gauche(int time_1, int time_2)
   reculer_gauche(time_2);
 }
 
-void automatic(void)
+void get_distance(void)
 {
   digitalWrite(pin_trig_droite, 1);
   digitalWrite(pin_trig_gauche, 1);
@@ -142,4 +143,44 @@ void tourner_droite(int time_1, int time_2)
 void affichage_vitesse(void)
 {
   display.printf("vitesse = %d", vitesse);
+}
+void bluetooth(void)
+{
+  if (Serial1.available()) 
+      {
+        data_bt = Serial1.read();
+        switch (data_bt) 
+        {
+          case 'A':
+            avancer_droite(100);
+            avancer_gauche(100);
+            break;
+          case 'R':
+            reculer_droite(100);
+            reculer_gauche(100);
+            break;
+          case 'B':
+            freinage();
+            break;
+          case 'D':
+            avancer_gauche(100);
+            reculer_droite(100);
+            break;
+          case 'G':
+            avancer_droite(100);
+            reculer_gauche(100);
+            break;
+        }
+      }
+}
+void automatic(int distance_min)
+{
+  if (distance_droite <= distance_min) 
+  {
+    tourner_gauche(200, 200);
+  }
+  if (distance_gauche <= disance_min) 
+  {
+    tourner_droite(200, 200);
+  }
 }
