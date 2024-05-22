@@ -31,9 +31,7 @@ void setup()
 }
 //**************LOOP*****************
 void loop() {
-  //mode_de_fonctionnement = mode_bluetooth;
-  display.setCursor(0, 0);
-  #ifdef bt_debug
+  #ifdef bt_debug //affiche la réception bluetooth
   while(1)
   {
     if (Serial1.available())
@@ -43,6 +41,8 @@ void loop() {
     }
   }
   #endif
+  //mode_de_fonctionnement = mode_bluetooth;
+  display.setCursor(0, 0);
   switch (mode_de_fonctionnement) 
   {
     case pas_de_choix:
