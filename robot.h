@@ -14,9 +14,9 @@ extern Adafruit_SH1107 display;
 #define pin_echo_droite A1
 #define pin_echo_gauche A3
 #define in1 10
-#define in2 11
-#define in3 12
-#define in4 13
+#define in2 13
+#define in3 11
+#define in4 12
 //*****************VARIABLE****************
 extern unsigned long impulsion_echo_droite,impulsion_echo_gauche;
 extern unsigned int distance_droite,distance_gauche;
