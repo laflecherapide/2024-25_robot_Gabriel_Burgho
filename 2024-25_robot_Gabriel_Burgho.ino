@@ -1,5 +1,6 @@
 //************LIBRAIRIE*************
 #include "robot.h"
+#include "interrupt.h"
 //#define bt_debug
 //**************SETUP*****************
 void setup() 
@@ -12,6 +13,10 @@ void setup()
   pinMode(pin_trig_droite, OUTPUT);
   pinMode(pin_echo_gauche, INPUT);
   pinMode(pin_trig_gauche, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
   display.begin(0x3C, true);
   display.display();
   delay(1000);

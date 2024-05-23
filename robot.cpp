@@ -68,6 +68,7 @@ int speed_choice(void)
       }
     if (!digitalRead(BP_B)) token_speed_choice = 1;
     delay(1);
+    //if ()millis()
   }
   return speed;
 }
@@ -187,7 +188,7 @@ void automatic(int distance_min)
   {
     tourner_gauche(200, 200);
   }
-  if (distance_gauche <= disance_min) 
+  if (distance_gauche <= distance_min) 
   {
     tourner_droite(200, 200);
   }
