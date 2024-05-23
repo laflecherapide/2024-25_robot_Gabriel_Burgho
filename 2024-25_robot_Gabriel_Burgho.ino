@@ -1,7 +1,7 @@
 //************LIBRAIRIE*************
 #include "robot.h"
 #include "interrupt.h"
-//#define bt_debug
+#define bt_debug
 //**************SETUP*****************
 void setup() 
 {
@@ -27,6 +27,11 @@ void setup()
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
   init_interrupt(10);
+
+  digitalWrite(in1, 0);
+  digitalWrite(in2, 0);
+  digitalWrite(in3, 0);
+  digitalWrite(in4, 0);
   speed_choice();
 }
 //**************LOOP*****************
@@ -43,29 +48,5 @@ void loop() {
   #endif
   //mode_de_fonctionnement = mode_bluetooth;
   display.setCursor(0, 0);
-  switch (mode_de_fonctionnement) 
-  {
-    case pas_de_choix:
-      refresh_display();
-      avant_choix();//todo
-      mode_de_fonctionnement = choix_user();//todo
-      break;
-    case mode_bluetooth:
-      display.setCursor(0, 0);
-      display.println("bluetooth");
-      display_speed();
-      refresh_display();
-      bluetooth(); //todo
-      break;
-    case mode_auto:
-      display.setCursor(0, 0);
-      display.println("automatique");
-      display_speed();
-      refresh_display();
-      get_distance();
-      avancer_droite(100);
-      avancer_gauche(100);
-      TimerCallback0();  //todo    
-      break;
-  }
+  TimerCallback0();
 }

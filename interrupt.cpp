@@ -13,7 +13,32 @@ void TC5_Handler()
 }
 void TimerCallback0(void)
 {
-  automatic(7);
+  display.setCursor(0, 0);
+    switch (mode_de_fonctionnement) 
+  {
+    case pas_de_choix:
+      refresh_display();
+      avant_choix();//todo
+      mode_de_fonctionnement = choix_user();//todo
+      break;
+    case mode_bluetooth:
+      display.setCursor(0, 0);
+      display.println("bluetooth");
+      display_speed();
+      refresh_display();
+      //bluetooth(); //todo
+      break;
+    case mode_auto:
+      display.setCursor(0, 0);
+      display.println("automatique");
+      display_speed();
+      refresh_display();
+      get_distance();
+      avancer_droite(100);
+      avancer_gauche(100);
+      automatic(7);
+      break;
+  }
 }
 
 void init_interrupt(float freq)

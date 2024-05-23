@@ -59,16 +59,16 @@ int speed_choice(void)
     if (!digitalRead(BP_A) && speed < 200) 
       {
         speed += 10;
-        while(1);
+        //while(1);
       } 
     if (!digitalRead(BP_C) && speed > 0)
       {
         speed -= 10;
-        while(1);
+        //while(1);
       }
     if (!digitalRead(BP_B)) token_speed_choice = 1;
-    delay(1);
     //if ()millis()
+    delay(1);
   }
   return speed;
 }
