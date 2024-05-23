@@ -7,7 +7,7 @@ Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
 unsigned long impulsion_echo_droite,impulsion_echo_gauche;
 unsigned int distance_droite,distance_gauche;
 char data_bt;
-unsigned int vitesse = 0;
+unsigned int speed = 0;
 int mode_de_fonctionnement;
 //****************FONCTION*****************
 int choix_user(void) 
@@ -47,26 +47,29 @@ int choix_user(void)
   return pas_de_choix;
 }
 
-int choix_vitesse(void)
+int speed_choice(void)
 {
-  while(true)
+  bool token_speed_choice = 0;
+  while(!token_speed_choice)
   {
     display.setCursor(0, 0);
-    display.println("choix de la vitesse:");
-    display.printf("vitesse = %d", vitesse);
+    display.println("speed choice");
+    display.printf("speed = %d", speed);
     refresh_display();
-    if (!digitalRead(BP_A) && vitesse < 200) 
-    {
-      vitesse += 10;
-      //while(1);
-      } 
-      if (!digitalRead(BP_C) && vitesse > 0)
+    if (!digitalRead(BP_A) && speed < 200) 
       {
-        vitesse -= 10;
-        //while(1);
-        }
-        if (!digitalRead(BP_B)) return vitesse;
-        }
+        speed += 10;
+        while(1);
+      } 
+    if (!digitalRead(BP_C) && speed > 0)
+      {
+        speed -= 10;
+        while(1);
+      }
+    if (!digitalRead(BP_B)) token_speed_choice = 1;
+    delay(1);
+  }
+  return speed;
 }
 
 void refresh_display(void)
@@ -145,9 +148,9 @@ void tourner_droite(int time_1, int time_2)
   reculer_droite(time_2);
 }
 
-void affichage_vitesse(void)
+void display_speed(void)
 {
-  display.printf("vitesse = %d", vitesse);
+  display.printf("speed = %d", speed);
 }
 void bluetooth(void)
 {

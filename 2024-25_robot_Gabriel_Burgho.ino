@@ -22,7 +22,7 @@ void setup()
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
   init_interrupt(10);
-  choix_vitesse();
+  speed_choice();
 }
 //**************LOOP*****************
 void loop() {
@@ -48,14 +48,14 @@ void loop() {
     case mode_bluetooth:
       display.setCursor(0, 0);
       display.println("bluetooth");
-      affichage_vitesse();
+      display_speed();
       refresh_display();
       bluetooth(); //todo
       break;
     case mode_auto:
       display.setCursor(0, 0);
       display.println("automatique");
-      affichage_vitesse();
+      display_speed();
       refresh_display();
       get_distance();
       avancer_droite(100);
