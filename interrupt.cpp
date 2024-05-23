@@ -14,13 +14,10 @@ void TC5_Handler()
 void TimerCallback0(void)
 {
   display.setCursor(0, 0);
+  if(token_speed_choice)
+  {
     switch (mode_de_fonctionnement) 
   {
-    case pas_de_choix:
-      refresh_display();
-      avant_choix();//todo
-      mode_de_fonctionnement = choix_user();//todo
-      break;
     case mode_bluetooth:
       display.setCursor(0, 0);
       display.println("bluetooth");
@@ -38,6 +35,12 @@ void TimerCallback0(void)
       avancer_gauche(100);
       automatic(7);
       break;
+    default:
+      refresh_display();
+      avant_choix();//todo
+      mode_de_fonctionnement = choix_user();//todo
+      break;
+  }
   }
 }
 

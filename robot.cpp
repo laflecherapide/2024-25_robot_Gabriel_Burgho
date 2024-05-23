@@ -9,6 +9,7 @@ unsigned int distance_droite,distance_gauche;
 char data_bt;
 unsigned int speed = 0;
 int mode_de_fonctionnement;
+bool token_speed_choice = 0;
 //****************FONCTION*****************
 int choix_user(void) 
 {
@@ -49,7 +50,6 @@ int choix_user(void)
 
 int speed_choice(void)
 {
-  bool token_speed_choice = 0;
   while(!token_speed_choice)
   {
     display.setCursor(0, 0);

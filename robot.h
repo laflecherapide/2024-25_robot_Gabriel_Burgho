@@ -23,6 +23,7 @@ extern unsigned int distance_droite,distance_gauche;
 extern char data_bt;
 extern unsigned int speed;
 extern int mode_de_fonctionnement;
+extern bool token_speed_choice;
 //****************FONCTION*****************
 int speed_choice(void);
 void refresh_display(void);

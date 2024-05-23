@@ -1,7 +1,7 @@
 //************LIBRAIRIE*************
 #include "robot.h"
 #include "interrupt.h"
-#define bt_debug
+//#define bt_debug
 //**************SETUP*****************
 void setup() 
 {
@@ -27,15 +27,10 @@ void setup()
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
   init_interrupt(10);
-
   digitalWrite(in1, 0);
   digitalWrite(in2, 0);
   digitalWrite(in3, 0);
   digitalWrite(in4, 0);
-  speed_choice();
-}
-//**************LOOP*****************
-void loop() {
   #ifdef bt_debug //affiche la réception bluetooth
   while(1)
   {
@@ -46,6 +41,10 @@ void loop() {
     }
   }
   #endif
+  speed_choice();
+}
+//**************LOOP*****************
+void loop() {
   //mode_de_fonctionnement = mode_bluetooth;
   display.setCursor(0, 0);
   TimerCallback0();
