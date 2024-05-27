@@ -18,15 +18,15 @@ int choix_user(void)
     display.setCursor(0, 0);
     if (!digitalRead(BP_A))
     {
-      display.println("mode bluetooth");
-      display.print("appuez sur B pour confirmer");
+      display.println("bluetooth mode");
+      display.print("press B to confirm");
       refresh_display();
       mode_de_fonctionnement = mode_bluetooth;
     }
     if (!digitalRead(BP_C))
     {
-      display.println("mode automatique");
-      display.print("appuez sur B pour confirmer");
+      display.println("automatic mode");
+      display.print("press B to confirm");
       refresh_display();
       mode_de_fonctionnement = mode_auto;
     }
@@ -70,8 +70,8 @@ void refresh_display(void)
 
 void avant_choix(void)
 {
-  display.print("choix d'utilisateur");
-  display.print("appuez sur B pour confirmer");
+  display.println("user choice");
+  display.print("press B to confirm");
 }
 
 void avancer_droite(int time)
@@ -150,23 +150,23 @@ void bluetooth(void)
         switch (data_bt) 
         {
           case 'A':
-            avancer_droite(100);
-            avancer_gauche(100);
+            avancer_droite(0);
+            avancer_gauche(0);
             break;
           case 'R':
-            reculer_droite(100);
-            reculer_gauche(100);
+            reculer_droite(0);
+            reculer_gauche(0);
             break;
           case 'B':
             freinage();
             break;
           case 'D':
-            avancer_gauche(100);
-            reculer_droite(100);
+            avancer_gauche(0);
+            reculer_droite(0);
             break;
           case 'G':
-            avancer_droite(100);
-            reculer_gauche(100);
+            avancer_droite(0);
+            reculer_gauche(0);
             break;
         }
       }

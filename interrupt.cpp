@@ -23,17 +23,17 @@ void TimerCallback0(void)
       display.println("bluetooth");
       display_speed();
       refresh_display();
-      //bluetooth(); //todo
+      bluetooth(); //todo
       break;
     case mode_auto:
       display.setCursor(0, 0);
-      display.println("automatique");
+      display.println("automatic");
       display_speed();
       refresh_display();
       get_distance();
       avancer_droite(100);
       avancer_gauche(100);
-      automatic(7);
+      automatic(7); //parametre distance min en cm
       break;
     default:
       refresh_display();
