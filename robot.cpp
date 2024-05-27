@@ -129,7 +129,7 @@ void get_distance(void)
   digitalWrite(pin_trig_gauche, 0);
   impulsion_echo_gauche = pulseIn(pin_echo_gauche, 1);
   impulsion_echo_droite = pulseIn(pin_echo_droite, 1);
-  delay(100);
+  delay(1);
   distance_gauche = impulsion_echo_gauche * 0.034/2;
   distance_droite = impulsion_echo_droite * 0.034/2;
 }
