@@ -41,7 +41,7 @@ void setup()
     }
   }
   #endif
-  speed_choice();
+  speed = speed_choice();
 }
 //**************LOOP*****************
 void loop() {

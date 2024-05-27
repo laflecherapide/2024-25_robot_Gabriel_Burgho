@@ -48,7 +48,7 @@ int speed_choice(void)
     display.println("speed choice");
     display.printf("speed = %d", speed);
     refresh_display();
-    if (!digitalRead(BP_A) && speed < 200) 
+    if (!digitalRead(BP_A) && speed < 250) 
       {
         speed += 10;
         //while(1);
