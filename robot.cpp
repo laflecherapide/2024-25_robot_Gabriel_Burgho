@@ -13,7 +13,8 @@ bool token_speed_choice = 0;
 //****************FONCTION*****************
 int choix_user(void) 
 {
-  while(1)
+  bool token_confirm = 0;
+  while(!token_confirm)
   {
     display.setCursor(0, 0);
     if (!digitalRead(BP_A))
@@ -32,9 +33,11 @@ int choix_user(void)
     }
     if (!digitalRead(BP_B))
     {
+      token_confirm = 1;
       return mode_de_fonctionnement;
     }
   }
+  return 0;
 }
 
 int speed_choice(void)
@@ -76,38 +79,38 @@ void avant_choix(void)
 
 void avancer_droite(int time)
 {
-  digitalWrite(in1,1);
-  digitalWrite(in2,0);
+  analogWrite(in1,speed);
+  analogWrite(in2,0);
   delay(time);
 }
 
 void avancer_gauche(int time)
 {
-  digitalWrite(in3,1);
-  digitalWrite(in4,0);
+  analogWrite(in3,speed);
+  analogWrite(in4,0);
   delay(time);
 }
 
 void reculer_droite(int time)
 {
-  digitalWrite(in1,0);
-  digitalWrite(in2,1);
+  analogWrite(in1,0);
+  analogWrite(in2,255);
   delay(time);
 }
 
 void reculer_gauche(int time)
 {
-  digitalWrite(in1,0);
-  digitalWrite(in2,1);
+  analogWrite(in1,0);
+  analogWrite(in2,255);
   delay(time);
 }
 
 void freinage(void)
 {
-  digitalWrite(in3,1);
-  digitalWrite(in4,1);
-  digitalWrite(in3,1);
-  digitalWrite(in4,1); 
+  analogWrite(in3,255);
+  analogWrite(in4,255);
+  analogWrite(in3,255);
+  analogWrite(in4,255); 
 }
 
 void tourner_gauche(int time_1, int time_2)
@@ -150,23 +153,23 @@ void bluetooth(void)
         switch (data_bt) 
         {
           case 'A':
-            avancer_droite(0);
-            avancer_gauche(0);
+            avancer_droite(1);
+            avancer_gauche(1);
             break;
           case 'R':
-            reculer_droite(0);
-            reculer_gauche(0);
+            reculer_droite(1);
+            reculer_gauche(1);
             break;
           case 'B':
             freinage();
             break;
           case 'D':
-            avancer_gauche(0);
-            reculer_droite(0);
+            avancer_gauche(1);
+            reculer_droite(1);
             break;
           case 'G':
-            avancer_droite(0);
-            reculer_gauche(0);
+            avancer_droite(1);
+            reculer_gauche(1);
             break;
         }
       }
