@@ -13,39 +13,28 @@ bool token_speed_choice = 0;
 //****************FONCTION*****************
 int choix_user(void) 
 {
-  if (!digitalRead(BP_C)) 
+  while(1)
   {
-    display.println("mode bluetooth");
-    display.print("appuez sur B pour confirmer");
-    refresh_display();
-    while (1) 
+    display.setCursor(0, 0);
+    if (!digitalRead(BP_A))
     {
-      display.setCursor(0, 0);
-      if (!digitalRead(BP_B)) 
-      {
-        display.print("bluetooth");
-        refresh_display();
-        return mode_bluetooth;
-      } else mode_de_fonctionnement = choix_user();
+      display.println("mode bluetooth");
+      display.print("appuez sur B pour confirmer");
+      refresh_display();
+      mode_de_fonctionnement = mode_bluetooth;
+    }
+    if (!digitalRead(BP_C))
+    {
+      display.println("mode automatique");
+      display.print("appuez sur B pour confirmer");
+      refresh_display();
+      mode_de_fonctionnement = mode_auto;
+    }
+    if (!digitalRead(BP_B))
+    {
+      return mode_de_fonctionnement;
     }
   }
-  if (!digitalRead(BP_A)) 
-  {
-    display.println("mode automatique");
-    display.print("appuez sur B pour confirmer");
-    refresh_display();
-    while (1) 
-    {
-      display.setCursor(0, 0);
-      if (!digitalRead(BP_B)) 
-      {
-        display.print("automatique");
-        refresh_display();
-        return mode_auto;
-      } else mode_de_fonctionnement = choix_user();
-    }
-  }
-  return pas_de_choix;
 }
 
 int speed_choice(void)
