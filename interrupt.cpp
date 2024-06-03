@@ -30,8 +30,6 @@ void TimerCallback0(void)
       display.println("automatic");
       display_speed();
       refresh_display();
-      avancer_droite(1);
-      avancer_gauche(1);
       get_distance();
       automatic(3); //parametre distance min en cm
       break;

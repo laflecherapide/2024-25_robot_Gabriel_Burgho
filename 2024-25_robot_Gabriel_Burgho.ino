@@ -26,7 +26,7 @@ void setup()
   display.setTextSize(1);
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
-  init_interrupt(10);
+  init_interrupt(10); //freq
   digitalWrite(in1, 0);
   digitalWrite(in2, 0);
   digitalWrite(in3, 0);
@@ -45,7 +45,6 @@ void setup()
 }
 //**************LOOP*****************
 void loop() {
-  //mode_de_fonctionnement = mode_bluetooth;
   display.setCursor(0, 0);
   TimerCallback0();
 }

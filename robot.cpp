@@ -184,4 +184,6 @@ void automatic(int distance_min)
   {
     tourner_droite(200, 200);
   }
+  avancer_droite(1);
+  avancer_gauche(1);
 }
