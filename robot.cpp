@@ -120,18 +120,26 @@ void tourner_gauche(int time_1, int time_2)
   reculer_gauche(time_2);
 }
 
-void get_distance(void)
+int get_distance_droite(void)
 {
   digitalWrite(pin_trig_droite, 1);
-  digitalWrite(pin_trig_gauche, 1);
   delayMicroseconds(10);
   digitalWrite(pin_trig_droite, 0);
-  digitalWrite(pin_trig_gauche, 0);
-  impulsion_echo_gauche = pulseIn(pin_echo_gauche, 1);
   impulsion_echo_droite = pulseIn(pin_echo_droite, 1);
   delay(1);
-  distance_gauche = impulsion_echo_gauche * 0.034/2;
   distance_droite = impulsion_echo_droite * 0.034/2;
+  return distance_droite;
+}
+
+int get_distance_gauche(void)
+{
+  digitalWrite(pin_trig_gauche, 1);
+  delayMicroseconds(10);
+  digitalWrite(pin_trig_gauche, 0);
+  impulsion_echo_gauche = pulseIn(pin_echo_gauche, 1);
+  delay(1);
+  distance_gauche = impulsion_echo_gauche * 0.034/2;
+  return distance_gauche;
 }
 
 void tourner_droite(int time_1, int time_2)
@@ -176,14 +184,12 @@ void bluetooth(void)
 }
 void automatic(int distance_min)
 {
-  if (distance_droite <= distance_min) 
+  if (distance_droite < distance_min) 
   {
     tourner_gauche(200, 200);
   }
-  if (distance_gauche <= distance_min) 
+  if (distance_gauche < distance_min) 
   {
     tourner_droite(200, 200);
   }
-  avancer_droite(1);
-  avancer_gauche(1);
 }
