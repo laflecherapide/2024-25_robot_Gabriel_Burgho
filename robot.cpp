@@ -98,7 +98,7 @@ void reculer_droite(int time)
   delay(time);
 }
 
-void reculer_gauche(int time)
+void reculer_gauche(int time)//marche pas
 {
   analogWrite(in1,0);
   analogWrite(in2,255);
