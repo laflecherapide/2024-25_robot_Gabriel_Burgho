@@ -35,8 +35,8 @@ void TimerCallback0(void)
       Serial.println(distance_droite);
       Serial.println(distance_gauche);
       automatic(3); //parametre distance min en cm
-      avancer_droite(1);
-      avancer_gauche(1);
+      avancer_droite(1000);
+      avancer_gauche(1000);
       break;
     default:
       refresh_display();

@@ -98,10 +98,10 @@ void reculer_droite(int time)
   delay(time);
 }
 
-void reculer_gauche(int time)//marche pas
+void reculer_gauche(int time)
 {
-  analogWrite(in1,0);
-  analogWrite(in2,255);
+  analogWrite(in3,0);
+  analogWrite(in4,255);
   delay(time);
 }
 
@@ -168,9 +168,6 @@ void bluetooth(void)
             reculer_droite(1);
             reculer_gauche(1);
             break;
-          case 'B':
-            freinage();
-            break;
           case 'D':
             avancer_gauche(1);
             reculer_droite(1);
@@ -178,6 +175,9 @@ void bluetooth(void)
           case 'G':
             avancer_droite(1);
             reculer_gauche(1);
+            break;
+          default:
+            freinage();
             break;
         }
       }
