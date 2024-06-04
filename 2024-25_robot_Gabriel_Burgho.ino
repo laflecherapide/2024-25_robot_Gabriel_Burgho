@@ -46,5 +46,37 @@ void setup()
 //**************LOOP*****************
 void loop() {
   display.setCursor(0, 0);
-  TimerCallback0();
+  //TimerCallback0();
+  display.setCursor(0, 0);
+  if(token_speed_choice)
+  {
+    switch (mode_de_fonctionnement) 
+  {
+    case mode_bluetooth:
+      display.setCursor(0, 0);
+      display.println("bluetooth");
+      display_speed();
+      refresh_display();
+      bluetooth(); //todo
+      break;
+    case mode_auto:
+      display.setCursor(0, 0);
+      display.println("automatic");
+      display_speed();
+      refresh_display();
+      distance_gauche = get_distance_gauche();
+      distance_droite = get_distance_droite();
+      Serial.println(distance_droite);
+      Serial.println(distance_gauche);
+      automatic(3); //parametre distance min en cm
+      avancer_droite(1000);
+      avancer_gauche(1000);
+      break;
+    default:
+      refresh_display();
+      avant_choix();//todo
+      mode_de_fonctionnement = choix_user();//todo
+      break;
+  }
+  }
 }

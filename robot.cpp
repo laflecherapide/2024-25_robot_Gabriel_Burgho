@@ -109,8 +109,8 @@ void freinage(void)
 {
   analogWrite(in3,255);
   analogWrite(in4,255);
-  analogWrite(in3,255);
-  analogWrite(in4,255); 
+  analogWrite(in2,255);
+  analogWrite(in1,255); 
 }
 
 void tourner_gauche(int time_1, int time_2)
@@ -175,6 +175,9 @@ void bluetooth(void)
           case 'G':
             avancer_droite(1);
             reculer_gauche(1);
+            break;
+          case 'B':
+            freinage();
             break;
           default:
             freinage();
