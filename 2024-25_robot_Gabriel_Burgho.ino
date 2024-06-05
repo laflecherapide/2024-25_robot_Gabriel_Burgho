@@ -46,9 +46,9 @@ void setup()
 //**************LOOP*****************
 void loop() {
   display.setCursor(0, 0);
-  //TimerCallback0();
+  TimerCallback0();
   display.setCursor(0, 0);
-  if(token_speed_choice)
+  /*if(token_speed_choice)
   {
     switch (mode_de_fonctionnement) 
   {
@@ -78,5 +78,5 @@ void loop() {
       mode_de_fonctionnement = choix_user();//todo
       break;
   }
-  }
+  }*/
 }

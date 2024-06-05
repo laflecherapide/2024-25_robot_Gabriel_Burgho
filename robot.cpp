@@ -1,3 +1,4 @@
+#include "delay.h"
 //****************LIBRAIRIE*****************
 #include "robot.h"
 #include "interrupt.h"
@@ -115,7 +116,6 @@ void freinage(void)
 
 void tourner_gauche(int time_1, int time_2)
 {
-  freinage();
   avancer_droite(time_1);
   reculer_gauche(time_2);
 }
@@ -144,7 +144,6 @@ int get_distance_gauche(void)
 
 void tourner_droite(int time_1, int time_2)
 {
-  freinage();
   avancer_gauche(time_1);
   reculer_droite(time_2);
 }
@@ -187,12 +186,29 @@ void bluetooth(void)
 }
 void automatic(int distance_min)
 {
-  if (distance_droite < distance_min) 
+  distance_gauche = get_distance_gauche();
+  distance_droite = get_distance_droite();
+  Serial.println(distance_droite);
+  Serial.println(distance_gauche);
+  while (distance_droite <= distance_min)
   {
-    tourner_gauche(200, 200);
+      avancer_droite(1);
+      reculer_gauche(1);
+      distance_gauche = get_distance_gauche();
+      distance_droite = get_distance_droite();
   }
-  if (distance_gauche < distance_min) 
+  while (distance_gauche <= distance_min)
   {
-    tourner_droite(200, 200);
+      avancer_gauche(1);
+      reculer_droite(1);
+      distance_gauche = get_distance_gauche();
+      distance_droite = get_distance_droite();
+  }
+  while (distance_gauche <= distance_min && distance_droite <= distance_min)
+  {
+      reculer_droite(1);
+      reculer_droite(1);
+      distance_gauche = get_distance_gauche();
+      distance_droite = get_distance_droite();
   }
 }
