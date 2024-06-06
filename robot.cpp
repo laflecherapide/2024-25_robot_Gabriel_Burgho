@@ -198,32 +198,51 @@ void automatic(int distance_min)
   if (distance_droite <= distance_min)
   {
     token_gauche = 1;
+    avancer_gauche(200);
+    reculer_droite(200);
+    display.print("\ntourner_droite");
+    distance_gauche = get_distance_gauche();
+    distance_droite = get_distance_droite();
   }
   if (distance_gauche <= distance_min)
   {
     token_droite = 1;
+    avancer_droite(200);
+    reculer_gauche(200);
+    display.print("\ntourner_gauche");
+    distance_gauche = get_distance_gauche();
+    distance_droite = get_distance_droite();
   }
   if (distance_gauche <= distance_min && distance_droite <= distance_min)
   {
+    reculer_droite(200);
+    reculer_droite(200);
+    display.print("\nreculer");
     token_reculer = 1;
+    distance_gauche = get_distance_gauche();
+    distance_droite = get_distance_droite();
   }
-  while (token_droite)
+  /*if (token_droite)
   {
-    tourner_gauche(200, 200);
-    display.print("tourner_gauche");
+    //tourner_gauche(200, 200);
+    avancer_droite(200);
+    reculer_gauche(200);
+    display.print("\ntourner_gauche");
     token_droite = 0;
   }
-  while (token_gauche)
+  if (token_gauche)
   {
-    tourner_droite(200, 200);
-    displau.print("tourner_droite")
+    //tourner_droite(200, 200);
+    avancer_gauche(200);
+    reculer_droite(200);
+    display.print("\ntourner_droite");
     token_gauche = 0;
   }
-  while (token_reculer)
+  if (token_reculer)
   {
       reculer_droite(200);
       reculer_droite(200);
-      display.print("reculer");
+      display.print("\nreculer");
       token_reculer = 0;
-  }
+  }*/
 }
