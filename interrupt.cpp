@@ -32,7 +32,7 @@ void TimerCallback0(void)
       refresh_display();
       //distance_gauche = get_distance_gauche();
       //distance_droite = get_distance_droite();
-      automatic(7); //parametre: distance min en cm
+      automatic(5); //parametre: distance min en cm
       avancer_droite(10);
       avancer_gauche(10);
       break;

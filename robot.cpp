@@ -128,6 +128,7 @@ int get_distance_droite(void)
   impulsion_echo_droite = pulseIn(pin_echo_droite, 1);
   delay(1);
   distance_droite = impulsion_echo_droite * 0.034/2;
+  display.printf("\ndistance droite = %d", distance_droite);
   return distance_droite;
 }
 
@@ -139,6 +140,7 @@ int get_distance_gauche(void)
   impulsion_echo_gauche = pulseIn(pin_echo_gauche, 1);
   delay(1);
   distance_gauche = impulsion_echo_gauche * 0.034/2;
+  display.printf("\ndistance gauche = %d", distance_gauche);
   return distance_gauche;
 }
 
@@ -192,22 +194,22 @@ void automatic(int distance_min)
   Serial.println(distance_gauche);
   while (distance_droite <= distance_min)
   {
-      avancer_droite(1);
-      reculer_gauche(1);
-      distance_gauche = get_distance_gauche();
+      avancer_droite(1000);
+      reculer_gauche(1000);
       distance_droite = get_distance_droite();
+      distance_gauche = get_distance_gauche();
   }
   while (distance_gauche <= distance_min)
   {
-      avancer_gauche(1);
-      reculer_droite(1);
+      avancer_gauche(1000);
+      reculer_droite(1000);
       distance_gauche = get_distance_gauche();
       distance_droite = get_distance_droite();
   }
   while (distance_gauche <= distance_min && distance_droite <= distance_min)
   {
-      reculer_droite(1);
-      reculer_droite(1);
+      reculer_droite(1000);
+      reculer_droite(1000);
       distance_gauche = get_distance_gauche();
       distance_droite = get_distance_droite();
   }
