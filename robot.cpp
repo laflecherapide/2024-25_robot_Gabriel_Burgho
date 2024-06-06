@@ -190,25 +190,40 @@ void automatic(int distance_min)
   distance_droite = get_distance_droite();
   Serial.println(distance_droite);
   Serial.println(distance_gauche);
-  while (distance_droite <= distance_min)
+
+  bool token_droite = 0;
+  bool token_gauche = 0;
+  bool token_reculer = 0;
+
+  if (distance_droite <= distance_min)
   {
-      avancer_droite(1);
-      reculer_gauche(1);
-      distance_gauche = get_distance_gauche();
-      distance_droite = get_distance_droite();
+    token_gauche = 1;
   }
-  while (distance_gauche <= distance_min)
+  if (distance_gauche <= distance_min)
   {
-      avancer_gauche(1);
-      reculer_droite(1);
-      distance_gauche = get_distance_gauche();
-      distance_droite = get_distance_droite();
+    token_droite = 1;
   }
-  while (distance_gauche <= distance_min && distance_droite <= distance_min)
+  if (distance_gauche <= distance_min && distance_droite <= distance_min)
   {
-      reculer_droite(1);
-      reculer_droite(1);
-      distance_gauche = get_distance_gauche();
-      distance_droite = get_distance_droite();
+    token_reculer = 1;
+  }
+  while (token_droite)
+  {
+    tourner_gauche(200, 200);
+    display.print("tourner_gauche");
+    token_droite = 0;
+  }
+  while (token_gauche)
+  {
+    tourner_droite(200, 200);
+    displau.print("tourner_droite")
+    token_gauche = 0;
+  }
+  while (token_reculer)
+  {
+      reculer_droite(200);
+      reculer_droite(200);
+      display.print("reculer");
+      token_reculer = 0;
   }
 }
