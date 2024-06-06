@@ -76,4 +76,4 @@ void loop() {
       mode_de_fonctionnement = choix_user();//permet le choix du mode
       break;
   }
-  }}
+  }} 
