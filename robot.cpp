@@ -1,7 +1,6 @@
-#include "delay.h"
 //****************LIBRAIRIE*****************
 #include "robot.h"
-#include "interrupt.h"
+#include "delay.h"
 //******************OBJET*******************
 Adafruit_SH1107 display = Adafruit_SH1107(64, 128, &Wire);
 //*****************VARIABLE****************
@@ -82,14 +81,18 @@ void avancer_droite(int time)
 {
   analogWrite(in1,speed);
   analogWrite(in2,0);
+  Serial.printf("avant delay droite : %d", millis());
   delay(time);
+  Serial.printf("apres delay droite : %d", millis());
 }
 
 void avancer_gauche(int time)
 {
   analogWrite(in3,speed);
   analogWrite(in4,0);
+  Serial.printf("avant delay gauche : %d", millis());
   delay(time);
+  Serial.printf("apres delay gauche : %d", millis());
 }
 
 void reculer_droite(int time)
@@ -193,24 +196,22 @@ void automatic(int distance_min)
   Serial.println(distance_droite);
   Serial.println(distance_gauche);
   while (distance_droite <= distance_min)
-  {
-      avancer_droite(1000);
-      reculer_gauche(1000);
+    {
+      tourner_droite(500, 500);
       distance_droite = get_distance_droite();
       distance_gauche = get_distance_gauche();
-  }
+    }
   while (distance_gauche <= distance_min)
-  {
-      avancer_gauche(1000);
-      reculer_droite(1000);
+    {
+      tourner_gauche(500,500);
       distance_gauche = get_distance_gauche();
       distance_droite = get_distance_droite();
-  }
+    }
   while (distance_gauche <= distance_min && distance_droite <= distance_min)
-  {
-      reculer_droite(1000);
-      reculer_droite(1000);
+    {
+      reculer_droite(500);
+      reculer_droite(500);
       distance_gauche = get_distance_gauche();
       distance_droite = get_distance_droite();
-  }
+    }
 }
