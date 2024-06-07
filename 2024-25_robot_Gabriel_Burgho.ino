@@ -5,6 +5,7 @@
 void setup() 
 {
   Serial1.begin(9600);
+  Serial.begin(9600);
   pinMode(BP_A, INPUT_PULLUP);
   pinMode(BP_B, INPUT_PULLUP);
   pinMode(BP_C, INPUT_PULLUP);
@@ -25,7 +26,7 @@ void setup()
   display.setTextSize(1);
   display.setTextColor(SH110X_WHITE);
   display.setRotation(1);
-  digitalWrite(in1, 0);
+  digitalWrite(in1, 0); //mise à l'état bas par défaut
   digitalWrite(in2, 0);
   digitalWrite(in3, 0);
   digitalWrite(in4, 0);
@@ -35,7 +36,7 @@ void setup()
         if (Serial1.available())
           {
             char bt = Serial1.read();
-            Serial.println(bt);
+            Serial.printf("contenu Buetooth recuperer : %c \n", bt);
           }
       }
   #endif
@@ -60,13 +61,13 @@ void loop()
           display_speed();
           refresh_display();
           automatic(3); //parametre: distance min en cm
-          avancer_droite(1);
-          avancer_gauche(1);
+          forward_right(1);
+          forward_left(1);
         break;
         default:
           refresh_display();
-          avant_choix();//todo
-          mode_de_fonctionnement = choix_user();//permet le choix du mode
+          before_choice();//affiche "user choice"
+          mode_de_fonctionnement = user_choice();//permet le choix du mode bloquant tant que B n'est pas appuyé
         break;
       }
 } 

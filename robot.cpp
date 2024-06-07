@@ -11,7 +11,7 @@ unsigned int speed = 0;
 int mode_de_fonctionnement;
 bool token_speed_choice = 0;
 //****************FONCTION*****************
-int choix_user(void) 
+int user_choice(void) 
 {
   bool token_confirm = 0;
   while(!token_confirm)
@@ -71,13 +71,13 @@ void refresh_display(void)
   display.clearDisplay();
 }
 
-void avant_choix(void)
+void before_choice(void)
 {
   display.println("user choice");
   display.print("press B to confirm");
 }
 
-void avancer_droite(int time)
+void forward_right(int time)
 {
   analogWrite(in1,speed);
   analogWrite(in2,0);
@@ -86,7 +86,7 @@ void avancer_droite(int time)
   Serial.printf("apres delay droite : %d", millis());
 }
 
-void avancer_gauche(int time)
+void forward_left(int time)
 {
   analogWrite(in3,speed);
   analogWrite(in4,0);
@@ -117,13 +117,13 @@ void freinage(void)
   analogWrite(in1,255); 
 }
 
-void tourner_gauche(int time_1, int time_2)
+void left_turn(int time_1, int time_2)
 {
-  avancer_droite(time_1);
+  forward_right(time_1);
   reculer_gauche(time_2);
 }
 
-int get_distance_droite(void)
+int get_distance_right(void)
 {
   digitalWrite(pin_trig_droite, 1);
   delayMicroseconds(10);
@@ -135,7 +135,7 @@ int get_distance_droite(void)
   return distance_droite;
 }
 
-int get_distance_gauche(void)
+int get_distance_left(void)
 {
   digitalWrite(pin_trig_gauche, 1);
   delayMicroseconds(10);
@@ -147,9 +147,9 @@ int get_distance_gauche(void)
   return distance_gauche;
 }
 
-void tourner_droite(int time_1, int time_2)
+void right_turn(int time_1, int time_2)
 {
-  avancer_gauche(time_1);
+  forward_left(time_1);
   reculer_droite(time_2);
 }
 
@@ -165,19 +165,19 @@ void bluetooth(void)
         switch (data_bt) 
         {
           case 'A':
-            avancer_droite(1);
-            avancer_gauche(1);
+            forward_right(1);
+            forward_left(1);
             break;
           case 'R':
             reculer_droite(1);
             reculer_gauche(1);
             break;
           case 'D':
-            avancer_gauche(1);
+            forward_left(1);
             reculer_droite(1);
             break;
           case 'G':
-            avancer_droite(1);
+            forward_right(1);
             reculer_gauche(1);
             break;
           case 'B':
@@ -191,27 +191,27 @@ void bluetooth(void)
 }
 void automatic(int distance_min)
 {
-  distance_gauche = get_distance_gauche();
-  distance_droite = get_distance_droite();
+  distance_gauche = get_distance_left();
+  distance_droite = get_distance_right();
   Serial.println(distance_droite);
   Serial.println(distance_gauche);
   while (distance_droite <= distance_min)
     {
-      tourner_droite(500, 500);
-      distance_droite = get_distance_droite();
-      distance_gauche = get_distance_gauche();
+      right_turn(500, 500);
+      distance_droite = get_distance_right();
+      distance_gauche = get_distance_left();
     }
   while (distance_gauche <= distance_min)
     {
-      tourner_gauche(500,500);
-      distance_gauche = get_distance_gauche();
-      distance_droite = get_distance_droite();
+      left_turn(500,500);
+      distance_gauche = get_distance_left();
+      distance_droite = get_distance_right();
     }
   while (distance_gauche <= distance_min && distance_droite <= distance_min)
     {
       reculer_droite(500);
       reculer_droite(500);
-      distance_gauche = get_distance_gauche();
-      distance_droite = get_distance_droite();
+      distance_gauche = get_distance_left();
+      distance_droite = get_distance_right();
     }
 }
