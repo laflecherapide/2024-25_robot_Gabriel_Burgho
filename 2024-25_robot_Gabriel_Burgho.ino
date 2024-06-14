@@ -3,7 +3,7 @@
 //#define bt_debug
 //**************SETUP*****************
 void setup() 
-{
+{ //TODO inverser distance droite - gauche
   Serial1.begin(9600);
   Serial.begin(9600);
   pinMode(BP_A, INPUT_PULLUP);

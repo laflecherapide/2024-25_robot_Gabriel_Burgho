@@ -81,18 +81,14 @@ void forward_right(int time)
 {
   analogWrite(in1,speed);
   analogWrite(in2,0);
-  Serial.printf("avant delay droite : %d", millis());
   delay(time);
-  Serial.printf("apres delay droite : %d", millis());
 }
 
 void forward_left(int time)
 {
   analogWrite(in3,speed);
   analogWrite(in4,0);
-  Serial.printf("avant delay gauche : %d", millis());
   delay(time);
-  Serial.printf("apres delay gauche : %d", millis());
 }
 
 void reculer_droite(int time)
