@@ -1,3 +1,8 @@
+/*code robot 
+Burgho Gabriel 
+feather M0 express(SAMD21) HC-08 télémètre ultrason (SR04)
+20/06/2024*/
+
 //************LIBRAIRIE*************
 #include "robot.h"
 //#define bt_debug
